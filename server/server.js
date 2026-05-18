@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const pool = require('./config/db');
-const authRoutes = require('./routes/auth'); // Внасяне на новите рутове
+const authRoutes = require('./routes/auth');
+const scoresRoutes = require('./routes/scores');
 require('dotenv').config();
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // Активиране на маршрутите за Регистрация и Вход
 app.use('/api/auth', authRoutes);
+app.use('/api/scores', scoresRoutes);
 
 // Базов маршрут за тест
 app.get('/', (req, res) => {
