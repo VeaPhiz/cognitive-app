@@ -306,7 +306,7 @@ export default function ReactionTime() {
 
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
-    <main className="min-h-screen bg-gray-950 pt-16 pb-24">
+    <main className="min-h-screen bg-[var(--color-bg)] pt-16 pb-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         {/* Back */}
@@ -429,7 +429,7 @@ export default function ReactionTime() {
               {/* Save status */}
               <div className="flex items-center gap-2 text-base">
                 {!user && (
-                  <p className="text-gray-500 text-base">
+                  <p className="text-[var(--color-text-muted)] text-base">
                     <Link to="/login" className="text-indigo-400 hover:text-indigo-300">Log in</Link>
                     {" "}to save your score
                   </p>
@@ -495,18 +495,18 @@ export default function ReactionTime() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
 
           {/* Recent Attempts */}
-          <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-3xl p-6">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-white font-semibold text-lg">Session History</h2>
+              <h2 className="text-[var(--color-text)] font-semibold text-lg">Session History</h2>
               <span className="text-xs text-slate-500 font-mono">last {MAX_HISTORY} attempts</span>
             </div>
             <RecentAttempts history={history} />
           </div>
 
           {/* Leaderboard */}
-          <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-3xl p-6">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="text-white font-semibold text-lg">Leaderboard</h2>
+              <h2 className="text-[var(--color-text)] font-semibold text-lg">Leaderboard</h2>
               <button
                 onClick={fetchLeaderboard}
                 className="text-xs text-gray-600 hover:text-gray-400 transition-colors
@@ -558,7 +558,7 @@ export default function ReactionTime() {
             <div className="w-10 h-10 rounded-xl bg-indigo-950 border border-indigo-800/50
                             flex items-center justify-center text-xl shrink-0">🧠</div>
             <div>
-              <h2 className="text-white font-semibold text-lg">The Neuroscience Behind It</h2>
+              <h2 className="text-[var(--color-text)] font-semibold text-lg">The Neuroscience Behind It</h2>
               <p className="text-gray-600 text-sm mt-0.5">
                 Why training reaction time rewires your brain
               </p>

@@ -1,1 +1,77 @@
 @import "tailwindcss";
+
+/* ── Theme definitions via data-theme on <html> ─────────────────────────────
+   Every theme exposes the same 8 tokens. Components only ever reference
+   these tokens — never hard-coded colors.                                   */
+
+/* DEFAULT: Deep Slate */
+:root, [data-theme="deep-slate"] {
+  --color-bg:         #30364F;   /* page background                */
+  --color-surface:    #3c4460;   /* cards, panels                  */
+  --color-surface-2:  #464e6e;   /* nested surfaces, hover states  */
+  --color-border:     #535c7a;   /* all borders                    */
+  --color-primary:    #ACBAC4;   /* primary accent / buttons       */
+  --color-text:       #F0F0DB;   /* main body text                 */
+  --color-text-muted: #ACBAC4;   /* secondary / label text         */
+  --color-text-faint: #7a8499;   /* placeholder, disabled          */
+}
+
+/* Pastel Sun */
+[data-theme="pastel-sun"] {
+  --color-bg:         #FFF9D2;
+  --color-surface:    #FFEBCC;
+  --color-surface-2:  #fde0b4;
+  --color-border:     #e8c99a;
+  --color-primary:    #8CC0EB;
+  --color-text:       #2a2a2a;
+  --color-text-muted: #5a6a7a;
+  --color-text-faint: #9aabb8;
+}
+
+/* Cyber Ocean */
+[data-theme="cyber-ocean"] {
+  --color-bg:         #093C5D;
+  --color-surface:    #0e4f7a;
+  --color-surface-2:  #1a5f8a;
+  --color-border:     #3B7597;
+  --color-primary:    #5DF8D8;
+  --color-text:       #e8fdfa;
+  --color-text-muted: #6FD1D7;
+  --color-text-faint: #3B7597;
+}
+
+/* Nordic Luxury */
+[data-theme="nordic-luxury"] {
+  --color-bg:         #E8EDF2;
+  --color-surface:    #ffffff;
+  --color-surface-2:  #dde4eb;
+  --color-border:     #c5ced8;
+  --color-primary:    #C2A56D;
+  --color-text:       #2C3947;
+  --color-text-muted: #547A95;
+  --color-text-faint: #94a8b8;
+}
+
+/* ── Base styles ─────────────────────────────────────────────────────────── */
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Smooth theme transitions on all themed elements */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+/* Suppress transition on things that shouldn't animate (e.g. spinners) */
+.no-theme-transition, .no-theme-transition * {
+  transition: none !important;
+}

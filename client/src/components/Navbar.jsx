@@ -1,14 +1,48 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth }  from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
+// ── Swatch strip used inside the dropdown ─────────────────────────────────────
+function ThemeOption({ theme, isActive, onSelect }) {
+  return (
+    <button
+      onClick={() => onSelect(theme.id)}
+      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left
+                  transition-all duration-150
+                  ${isActive
+                    ? "bg-[var(--color-surface-2)] ring-1 ring-[var(--color-primary)]"
+                    : "hover:bg-[var(--color-surface-2)]"
+                  }`}
+    >
+      {/* 4-color swatch */}
+      <div className="flex gap-0.5 shrink-0">
+        {theme.swatch.map((hex) => (
+          <span
+            key={hex}
+            className="w-3.5 h-3.5 rounded-sm border border-black/10"
+            style={{ backgroundColor: hex }}
+          />
+        ))}
+      </div>
+      <span className="text-sm font-medium text-[var(--color-text)] truncate">
+        {theme.label}
+      </span>
+      {isActive && (
+        <span className="ml-auto text-[var(--color-primary)] text-xs">✓</span>
+      )}
+    </button>
+  );
+}
+
+// ── Main Navbar ───────────────────────────────────────────────────────────────
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout }           = useAuth();
+  const { themeId, setThemeId, themes } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate();
+  const navigate    = useNavigate();
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -26,15 +60,18 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800">
+    <nav className="fixed top-0 left-0 right-0 z-50
+                    bg-[var(--color-surface)]/80 backdrop-blur-md
+                    border-b border-[var(--color-border)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
           {/* ── Logo ── */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center
-                            group-hover:bg-indigo-500 transition-colors duration-200">
-              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center
+                            bg-[var(--color-primary)] transition-opacity group-hover:opacity-80">
+              <svg className="w-5 h-5 text-[var(--color-bg)]" fill="none" viewBox="0 0 24 24"
+                   stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round"
                   d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3
                      m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547
@@ -42,95 +79,140 @@ export default function Navbar() {
                      c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
             </div>
-            <span className="text-white font-bold text-lg tracking-tight">
-              Mind<span className="text-indigo-400">Lab</span>
+            <span className="font-bold text-lg tracking-tight text-[var(--color-text)]">
+              Mind<span className="text-[var(--color-primary)]">Lab</span>
             </span>
           </Link>
 
           {/* ── Right side ── */}
           <div className="flex items-center gap-3">
+
+            {/* Guest: theme pill + auth buttons */}
             {!user ? (
-              /* Guest Mode */
               <>
-                <Link
-                  to="/login"
-                  className="text-sm text-gray-300 hover:text-white px-4 py-2 rounded-lg
-                             hover:bg-gray-800 transition-all duration-200"
-                >
+                {/* Compact theme switcher for guests */}
+                <div className="hidden sm:flex items-center gap-1 p-1 rounded-xl
+                                bg-[var(--color-surface-2)] border border-[var(--color-border)]">
+                  {themes.map((t) => (
+                    <button
+                      key={t.id}
+                      onClick={() => setThemeId(t.id)}
+                      title={t.label}
+                      className={`flex gap-0.5 p-1 rounded-lg transition-all duration-150
+                                  ${themeId === t.id
+                                    ? "ring-1 ring-[var(--color-primary)] bg-[var(--color-surface)]"
+                                    : "hover:bg-[var(--color-surface)] opacity-60 hover:opacity-100"
+                                  }`}
+                    >
+                      {t.swatch.slice(0, 2).map((hex) => (
+                        <span key={hex} className="w-2.5 h-2.5 rounded-[3px]"
+                              style={{ backgroundColor: hex }} />
+                      ))}
+                    </button>
+                  ))}
+                </div>
+
+                <Link to="/login"
+                  className="text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200
+                             text-[var(--color-text-muted)] hover:text-[var(--color-text)]
+                             hover:bg-[var(--color-surface-2)]">
                   Log In
                 </Link>
-                <Link
-                  to="/register"
-                  className="text-sm text-white bg-indigo-600 hover:bg-indigo-500 px-4 py-2
-                             rounded-lg font-medium transition-all duration-200 shadow-lg
-                             shadow-indigo-900/30"
-                >
+                <Link to="/register"
+                  className="text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200
+                             bg-[var(--color-primary)] text-[var(--color-bg)]
+                             hover:opacity-90 shadow-md">
                   Sign Up
                 </Link>
               </>
             ) : (
-              /* Logged-in Mode */
+              /* ── Logged-in dropdown ── */
               <div className="relative" ref={dropdownRef}>
                 <button
-                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  onClick={() => setDropdownOpen((p) => !p)}
                   className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-full
-                             bg-gray-800 hover:bg-gray-700 border border-gray-700
-                             hover:border-gray-600 transition-all duration-200 group"
+                             border transition-all duration-200
+                             bg-[var(--color-surface-2)] border-[var(--color-border)]
+                             hover:border-[var(--color-primary)]/50"
                 >
-                  {/* Avatar circle */}
-                  <div className="w-7 h-7 rounded-full bg-indigo-600 flex items-center
-                                  justify-center text-white text-xs font-bold uppercase">
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center
+                                  text-xs font-bold uppercase
+                                  bg-[var(--color-primary)] text-[var(--color-bg)]">
                     {user.username?.[0] ?? "U"}
                   </div>
-                  <span className="text-sm text-gray-200 font-medium hidden sm:block">
+                  <span className="text-sm font-medium hidden sm:block text-[var(--color-text)]">
                     {user.username}
                   </span>
-                  {/* Chevron */}
                   <svg
-                    className={`w-4 h-4 text-gray-400 transition-transform duration-200
+                    className={`w-4 h-4 text-[var(--color-text-muted)] transition-transform duration-200
                                 ${dropdownOpen ? "rotate-180" : ""}`}
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                  >
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
 
-                {/* Dropdown Menu */}
+                {/* Dropdown */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-gray-900 border border-gray-700
-                                  rounded-xl shadow-2xl shadow-black/50 overflow-hidden
-                                  animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="px-4 py-3 border-b border-gray-800">
-                      <p className="text-xs text-gray-500 uppercase tracking-wider">Signed in as</p>
-                      <p className="text-sm text-white font-medium truncate mt-0.5">{user.email}</p>
+                  <div className="absolute right-0 mt-2 w-60
+                                  rounded-2xl shadow-2xl overflow-hidden z-50
+                                  bg-[var(--color-surface)] border border-[var(--color-border)]">
+
+                    {/* User info */}
+                    <div className="px-4 py-3 border-b border-[var(--color-border)]">
+                      <p className="text-xs uppercase tracking-wider text-[var(--color-text-faint)]">
+                        Signed in as
+                      </p>
+                      <p className="text-sm font-semibold truncate mt-0.5 text-[var(--color-text)]">
+                        {user.email}
+                      </p>
                     </div>
-                    <div className="p-1.5 flex flex-col gap-0.5">
+
+                    {/* Placeholder nav items */}
+                    <div className="p-1.5 flex flex-col gap-0.5 border-b border-[var(--color-border)]">
                       {[
-                        { icon: "👤", label: "Profile", note: "coming soon" },
-                        { icon: "📊", label: "My Stats",  note: "coming soon" },
-                        { icon: "⚙️", label: "Settings",  note: "coming soon" },
-                      ].map(({ icon, label, note }) => (
-                        <button
-                          key={label}
-                          disabled
-                          className="flex items-center justify-between w-full px-3 py-2 rounded-lg
-                                     text-left text-gray-500 cursor-not-allowed select-none"
-                        >
-                          <span className="flex items-center gap-2.5 text-sm">
+                        { icon: "👤", label: "Profile"   },
+                        { icon: "📊", label: "My Stats"  },
+                        { icon: "⚙️", label: "Settings"  },
+                      ].map(({ icon, label }) => (
+                        <button key={label} disabled
+                          className="flex items-center justify-between w-full px-3 py-2
+                                     rounded-lg text-left opacity-40 cursor-not-allowed">
+                          <span className="flex items-center gap-2.5 text-sm
+                                           text-[var(--color-text-muted)]">
                             <span>{icon}</span>{label}
                           </span>
-                          <span className="text-[10px] bg-gray-800 text-gray-600 px-1.5 py-0.5
-                                           rounded-md font-mono">{note}</span>
+                          <span className="text-[10px] px-1.5 py-0.5 rounded font-mono
+                                           bg-[var(--color-surface-2)] text-[var(--color-text-faint)]">
+                            soon
+                          </span>
                         </button>
                       ))}
                     </div>
-                    <div className="p-1.5 border-t border-gray-800">
-                      <button
-                        onClick={handleLogout}
+
+                    {/* ── Theme switcher ── */}
+                    <div className="p-1.5 border-b border-[var(--color-border)]">
+                      <p className="text-[10px] uppercase tracking-widest px-3 py-1.5
+                                    text-[var(--color-text-faint)] font-semibold">
+                        Theme
+                      </p>
+                      <div className="flex flex-col gap-0.5">
+                        {themes.map((t) => (
+                          <ThemeOption
+                            key={t.id}
+                            theme={t}
+                            isActive={themeId === t.id}
+                            onSelect={(id) => { setThemeId(id); setDropdownOpen(false); }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Logout */}
+                    <div className="p-1.5">
+                      <button onClick={handleLogout}
                         className="flex items-center gap-2.5 w-full px-3 py-2 rounded-lg
-                                   text-sm text-red-400 hover:text-red-300 hover:bg-red-950/40
-                                   transition-colors duration-150"
-                      >
+                                   text-sm transition-colors duration-150
+                                   text-red-400 hover:text-red-300 hover:bg-red-950/30">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round"
