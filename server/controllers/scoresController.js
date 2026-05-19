@@ -80,4 +80,30 @@ const getLeaderboard = async (req, res) => {
   }
 };
 
-module.exports = { saveScore, getLeaderboard };
+// GET /api/scores/:game_slug/my-history  (protected)
+const getMyHistory = async (req, res) => {
+  const { game_slug } = req.params;
+  const user_id = req.user.id;
+  const limit = parseInt(req.query.limit) || 10;
+
+  try {
+    const [games] = await pool.query(
+      "SELECT id FROM games WHERE slug = ? LIMIT 1", [game_slug]
+    );
+    if (games.length === 0)
+      return res.status(404).json({ message: "Game not found." });
+
+    const [rows] = await pool.query(
+      `SELECT value, recorded_at FROM scores
+       WHERE user_id = ? AND game_id = ?
+       ORDER BY recorded_at DESC LIMIT ?`,
+      [user_id, games[0].id, limit]
+    );
+    return res.status(200).json({ scores: rows });
+  } catch (err) {
+    console.error("[getMyHistory]", err);
+    return res.status(500).json({ message: "Server error." });
+  }
+};
+
+module.exports = { saveScore, getLeaderboard, getMyHistory };

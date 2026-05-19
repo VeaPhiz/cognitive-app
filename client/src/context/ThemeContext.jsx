@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 const THEMES = [
-  { id: "deep-slate",     label: "Deep Slate",     swatch: ["#30364F", "#ACBAC4", "#E1D9BC", "#F0F0DB"] },
+  { id: "deep-slate",     label: "Deep Slate",     swatch: ["#304f43", "#ACBAC4", "#E1D9BC", "#F0F0DB"] },
   { id: "pastel-sun",     label: "Pastel Sun",      swatch: ["#FFF9D2", "#FFEBCC", "#BFDDF0", "#8CC0EB"] },
   { id: "cyber-ocean",    label: "Cyber Ocean",     swatch: ["#093C5D", "#3B7597", "#6FD1D7", "#5DF8D8"] },
   { id: "nordic-luxury",  label: "Nordic Luxury",   swatch: ["#E8EDF2", "#2C3947", "#547A95", "#C2A56D"] },

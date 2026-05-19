@@ -14,6 +14,18 @@
   --color-text:       #F0F0DB;   /* main body text                 */
   --color-text-muted: #ACBAC4;   /* secondary / label text         */
   --color-text-faint: #7a8499;   /* placeholder, disabled          */
+  --color-state-danger: #ef4444;
+  --color-state-danger-muted: #fda4af;
+  --color-state-success: #4ade80;
+  --color-state-success-muted: #86efac;
+  --color-state-warning: #f59e0b;
+  --color-state-warning-muted: #fde68a;
+  --color-rating-superhuman: #facc15;
+  --color-rating-lightning: #4ade80;
+  --color-rating-excellent: #86efac;
+  --color-rating-good: #93c5fd;
+  --color-rating-average: #d1d5db;
+  --color-rating-keep-training: #f97316;
 }
 
 /* Pastel Sun */

@@ -91,25 +91,29 @@ export default function Navbar() {
             {!user ? (
               <>
                 {/* Compact theme switcher for guests */}
-                <div className="hidden sm:flex items-center gap-1 p-1 rounded-xl
-                                bg-[var(--color-surface-2)] border border-[var(--color-border)]">
-                  {themes.map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => setThemeId(t.id)}
-                      title={t.label}
-                      className={`flex gap-0.5 p-1 rounded-lg transition-all duration-150
-                                  ${themeId === t.id
-                                    ? "ring-1 ring-[var(--color-primary)] bg-[var(--color-surface)]"
-                                    : "hover:bg-[var(--color-surface)] opacity-60 hover:opacity-100"
-                                  }`}
-                    >
-                      {t.swatch.slice(0, 2).map((hex) => (
-                        <span key={hex} className="w-2.5 h-2.5 rounded-[3px]"
-                              style={{ backgroundColor: hex }} />
-                      ))}
-                    </button>
-                  ))}
+                <div className="hidden sm:flex items-center gap-2 p-1 rounded-xl bg-[var(--color-surface-2)] border border-[var(--color-border)]">
+                  <span className="text-xs font-semibold text-[var(--color-text)] uppercase tracking-wide">
+                    Themes
+                  </span>
+                  <div className="flex items-center gap-1">
+                    {themes.map((t) => (
+                      <button
+                        key={t.id}
+                        onClick={() => setThemeId(t.id)}
+                        title={t.label}
+                        className={`flex gap-0.5 p-1 rounded-lg transition-all duration-150
+                                    ${themeId === t.id
+                                      ? "ring-1 ring-[var(--color-primary)] bg-[var(--color-surface)]"
+                                      : "hover:bg-[var(--color-surface)] opacity-60 hover:opacity-100"
+                                    }`}
+                      >
+                        {t.swatch.slice(0, 2).map((hex) => (
+                          <span key={hex} className="w-2.5 h-2.5 rounded-[3px]"
+                                style={{ backgroundColor: hex }} />
+                        ))}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <Link to="/login"
@@ -126,15 +130,42 @@ export default function Navbar() {
                 </Link>
               </>
             ) : (
-              /* ── Logged-in dropdown ── */
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setDropdownOpen((p) => !p)}
-                  className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-full
-                             border transition-all duration-200
-                             bg-[var(--color-surface-2)] border-[var(--color-border)]
-                             hover:border-[var(--color-primary)]/50"
-                >
+              <>
+                {/* Compact theme switcher for logged-in users */}
+                <div className="hidden sm:flex items-center gap-2 p-1 rounded-xl bg-[var(--color-surface-2)] border border-[var(--color-border)]">
+                  <span className="text-xs font-semibold text-[var(--color-text)] uppercase tracking-wide">
+                    Themes
+                  </span>
+                  <div className="flex items-center gap-1">
+                    {themes.map((t) => (
+                      <button
+                        key={t.id}
+                        onClick={() => setThemeId(t.id)}
+                        title={t.label}
+                        className={`flex gap-0.5 p-1 rounded-lg transition-all duration-150
+                                    ${themeId === t.id
+                                      ? "ring-1 ring-[var(--color-primary)] bg-[var(--color-surface)]"
+                                      : "hover:bg-[var(--color-surface)] opacity-60 hover:opacity-100"
+                                    }`}
+                      >
+                        {t.swatch.slice(0, 2).map((hex) => (
+                          <span key={hex} className="w-2.5 h-2.5 rounded-[3px]"
+                                style={{ backgroundColor: hex }} />
+                        ))}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* ── Logged-in dropdown ── */}
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setDropdownOpen((p) => !p)}
+                    className="flex items-center gap-2.5 pl-2 pr-3 py-1.5 rounded-full
+                               border transition-all duration-200
+                               bg-[var(--color-surface-2)] border-[var(--color-border)]
+                               hover:border-[var(--color-primary)]/50"
+                  >
                   <div className="w-7 h-7 rounded-full flex items-center justify-center
                                   text-xs font-bold uppercase
                                   bg-[var(--color-primary)] text-[var(--color-bg)]">
@@ -189,24 +220,6 @@ export default function Navbar() {
                       ))}
                     </div>
 
-                    {/* ── Theme switcher ── */}
-                    <div className="p-1.5 border-b border-[var(--color-border)]">
-                      <p className="text-[10px] uppercase tracking-widest px-3 py-1.5
-                                    text-[var(--color-text-faint)] font-semibold">
-                        Theme
-                      </p>
-                      <div className="flex flex-col gap-0.5">
-                        {themes.map((t) => (
-                          <ThemeOption
-                            key={t.id}
-                            theme={t}
-                            isActive={themeId === t.id}
-                            onSelect={(id) => { setThemeId(id); setDropdownOpen(false); }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
                     {/* Logout */}
                     <div className="p-1.5">
                       <button onClick={handleLogout}
@@ -225,6 +238,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
+            </>
             )}
           </div>
         </div>

@@ -48,21 +48,21 @@ export default function Home() {
   const { user } = useAuth();
 
   return (
-    <main className="min-h-screen bg-gray-950 pt-16">
+    <main className="min-h-screen bg-[var(--color-bg)] pt-16">
 
       {/* ── Hero ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 bg-indigo-950/60 border border-indigo-800/50
-                          text-indigo-300 text-xs font-medium px-3 py-1.5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 bg-indigo-400 rounded-full animate-pulse" />
+          <div className="inline-flex items-center gap-2 bg-[var(--color-surface-2)] border border-[var(--color-border)]
+                          text-[var(--color-primary)] text-xs font-medium px-3 py-1.5 rounded-full mb-6">
+            <span className="w-1.5 h-1.5 bg-[var(--color-primary)] rounded-full animate-pulse" />
             Cognitive Training Platform
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white leading-tight tracking-tight mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[var(--color-text)] leading-tight tracking-tight mb-4">
             Train your mind,<br />
-            <span className="text-indigo-400">measure your limits.</span>
+            <span className="text-[var(--color-primary)]">measure your limits.</span>
           </h1>
-          <p className="text-gray-400 text-lg leading-relaxed">
+          <p className="text-[var(--color-text-muted)] text-lg leading-relaxed">
             A suite of science-inspired benchmarks to sharpen your reaction time,
             memory, focus, and more — all tracked over time.
           </p>
@@ -72,8 +72,8 @@ export default function Home() {
       {/* ── Games Grid ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-white font-semibold text-xl">Games</h2>
-          <span className="text-sm text-gray-500">
+          <h2 className="text-[var(--color-text)] font-semibold text-xl">Games</h2>
+          <span className="text-sm text-[var(--color-text-muted)]">
             {GAMES.filter(g => g.available).length} of {GAMES.length} available
           </span>
         </div>
@@ -87,33 +87,33 @@ export default function Home() {
       {/* ── Stats placeholder ── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div className="flex items-center gap-3 mb-6">
-          <h2 className="text-white font-semibold text-xl">Your Statistics</h2>
-          <span className="text-[10px] font-mono bg-gray-800 text-gray-500 px-2 py-0.5
-                           rounded-full border border-gray-700">coming soon</span>
+          <h2 className="text-[var(--color-text)] font-semibold text-xl">Your Statistics</h2>
+          <span className="text-[10px] font-mono bg-[var(--color-surface-2)] text-[var(--color-text-muted)] px-2 py-0.5
+                           rounded-full border border-[var(--color-border)]">coming soon</span>
         </div>
 
         {!user ? (
           /* Logged-out CTA */
-          <div className="rounded-2xl border border-dashed border-gray-700 bg-gray-900/40 p-12
+          <div className="rounded-2xl border border-dashed border-[var(--color-border)] bg-[var(--color-surface)]/80 p-12
                           flex flex-col items-center justify-center text-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-gray-800 flex items-center justify-center text-3xl">
+            <div className="w-14 h-14 rounded-2xl bg-[var(--color-surface-2)] flex items-center justify-center text-3xl text-[var(--color-text)]">
               📈
             </div>
             <div>
-              <p className="text-white font-medium mb-1">Track your progress over time</p>
-              <p className="text-gray-500 text-sm">
+              <p className="text-[var(--color-text)] font-medium mb-1">Track your progress over time</p>
+              <p className="text-[var(--color-text-muted)] text-sm">
                 Create a free account to save scores and view your performance graphs.
               </p>
             </div>
             <div className="flex gap-3 mt-2">
               <a href="/register"
-                 className="text-sm text-white bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5
-                            rounded-lg font-medium transition-colors shadow-lg shadow-indigo-950/40">
+                 className="text-sm text-[var(--color-bg)] bg-[var(--color-primary)] hover:opacity-90 px-5 py-2.5
+                            rounded-lg font-medium transition-colors shadow-lg shadow-[rgba(0,0,0,0.25)]">
                 Sign Up Free
               </a>
               <a href="/login"
-                 className="text-sm text-gray-300 hover:text-white px-5 py-2.5 rounded-lg
-                            border border-gray-700 hover:border-gray-600 transition-colors">
+                 className="text-sm text-[var(--color-text)] hover:text-[var(--color-text)] px-5 py-2.5 rounded-lg
+                            border border-[var(--color-border)] hover:bg-[var(--color-surface)] transition-colors">
                 Log In
               </a>
             </div>
@@ -123,11 +123,11 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {["Best Reaction Time", "Memory High Score", "Avg Typing Speed"].map((label) => (
               <div key={label}
-                   className="rounded-2xl border border-gray-800 bg-gray-900 p-6
+                   className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6
                               flex flex-col gap-2">
-                <p className="text-xs text-gray-500 uppercase tracking-wider font-medium">{label}</p>
-                <div className="h-8 w-24 bg-gray-800 rounded-lg animate-pulse" />
-                <div className="h-16 w-full bg-gray-800/60 rounded-xl mt-2 animate-pulse" />
+                <p className="text-xs text-[var(--color-text-muted)] uppercase tracking-wider font-medium">{label}</p>
+                <div className="h-8 w-24 bg-[var(--color-surface-2)] rounded-lg animate-pulse" />
+                <div className="h-16 w-full bg-[var(--color-surface-2)]/80 rounded-xl mt-2 animate-pulse" />
               </div>
             ))}
           </div>

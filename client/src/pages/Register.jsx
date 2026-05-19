@@ -23,7 +23,7 @@ function validate({ username, email, password, confirm }) {
 function Field({ label, id, error, children }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium text-gray-300">
+      <label htmlFor={id} className="text-sm font-medium text-[var(--color-text)]">
         {label}
       </label>
       {children}
@@ -74,34 +74,34 @@ export default function Register() {
   };
 
   const inputClass = (field) =>
-    `w-full bg-gray-800 text-white placeholder-gray-500 rounded-xl px-4 py-3 text-sm
+    `w-full bg-[var(--color-surface-2)] text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] rounded-xl px-4 py-3 text-sm
      border outline-none transition-all duration-200
-     focus:ring-2 focus:ring-indigo-500 focus:border-transparent
-     ${errors[field] ? "border-red-500/70" : "border-gray-700 hover:border-gray-600"}`;
+     focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent
+     ${errors[field] ? "border-red-500/70" : "border-[var(--color-border)] hover:border-[var(--color-primary)]"}`;
 
   return (
-    <main className="min-h-screen bg-gray-950 flex items-center justify-center px-4 pt-16">
+    <main className="min-h-screen bg-[var(--color-bg)] flex items-center justify-center px-4 pt-16">
 
       {/* Background glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-indigo-600/10
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-[var(--color-primary)]/15
                         rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-violet-600/10
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-[var(--color-surface-2)]/20
                         rounded-full blur-3xl" />
       </div>
 
       <div className="relative w-full max-w-md">
 
         {/* Card */}
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl
-                        shadow-black/60">
+        <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-2xl p-8 shadow-2xl
+                        shadow-black/20">
 
           {/* Header */}
           <div className="mb-8 text-center">
             <Link to="/" className="inline-flex items-center justify-center w-12 h-12
-                                    rounded-xl bg-indigo-600 mb-4 hover:bg-indigo-500
-                                    transition-colors">
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
+                                    rounded-xl bg-[var(--color-primary)] mb-4 hover:opacity-90
+                                    transition-all duration-200">
+              <svg className="w-6 h-6 text-[var(--color-bg)]" fill="none" viewBox="0 0 24 24"
                    stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round"
                   d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3
@@ -110,8 +110,8 @@ export default function Register() {
                      c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
             </Link>
-            <h1 className="text-2xl font-bold text-white">Create your account</h1>
-            <p className="text-gray-400 text-sm mt-1.5">Start benchmarking your mind today.</p>
+            <h1 className="text-2xl font-bold text-[var(--color-text)]">Create your account</h1>
+            <p className="text-[var(--color-text-muted)] text-sm mt-1.5">Start benchmarking your mind today.</p>
           </div>
 
           {/* Server error banner */}
@@ -165,8 +165,8 @@ export default function Register() {
                   type="button"
                   tabIndex="-1"
                   onClick={() => setShowPw((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500
-                             hover:text-gray-300 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]
+                             hover:text-[var(--color-text)] transition-colors"
                   aria-label={showPw ? "Hide password" : "Show password"}
                 >
                   {showPw ? "🙈" : "👁"}
@@ -188,8 +188,8 @@ export default function Register() {
                 <button
                   type="button"
                   onClick={() => setShowConfirm((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500
-                             hover:text-gray-300 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]
+                             hover:text-[var(--color-text)] transition-colors"
                   aria-label={showConfirm ? "Hide password" : "Show password"}
                 >
                   {showConfirm ? "🙈" : "👁"}
@@ -205,9 +205,9 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-800
-                         disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl
-                         transition-all duration-200 shadow-lg shadow-indigo-950/50 mt-1
+              className="w-full bg-[var(--color-primary)] hover:opacity-90 disabled:bg-[var(--color-primary)]/60
+                         disabled:cursor-not-allowed text-[var(--color-bg)] font-semibold py-3 rounded-xl
+                         transition-all duration-200 shadow-lg shadow-[rgba(74,222,128,0.25)] mt-1
                          flex items-center justify-center gap-2"
             >
               {loading ? (
@@ -221,9 +221,9 @@ export default function Register() {
           </form>
 
           {/* Footer */}
-          <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-[var(--color-text-muted)] mt-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-indigo-400 hover:text-indigo-300
+            <Link to="/login" className="text-[var(--color-primary)] hover:text-[var(--color-text)]
                                          font-medium transition-colors">
               Log in
             </Link>
@@ -256,11 +256,11 @@ function StrengthBar({ password }) {
       <div className="flex gap-1">
         {[0,1,2,3].map((i) => (
           <div key={i} className={`h-1 flex-1 rounded-full transition-all duration-300
-            ${i < score ? color : "bg-gray-700"}`} />
+            ${i < score ? color : "bg-[var(--color-surface-2)]"}`} />
         ))}
       </div>
-      <p className="text-xs text-gray-500">
-        Strength: <span className="text-gray-300">{label}</span>
+      <p className="text-xs text-[var(--color-text-muted)]">
+        Strength: <span className="text-[var(--color-text)]">{label}</span>
       </p>
     </div>
   );
