@@ -14,7 +14,7 @@ const STATE = {
 
 const MIN_WAIT = 2000;
 const MAX_WAIT = 6000;
-const MAX_HISTORY = 5;
+const MAX_HISTORY = 10; // max attempts shown in session history (all are saved to DB, but we don't want to overwhelm the UI)
 const OUTLIER_THRESHOLD = 2500; // ms — scores above this are saved but excluded from avg
 const MOVING_AVG_WINDOW = 10;  // last N valid attempts used for average
 

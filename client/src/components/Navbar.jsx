@@ -86,6 +86,10 @@ export default function Navbar() {
 
           {/* ── Right side ── */}
           <div className="flex items-center gap-3">
+            <Link to="/game/memory-matrix"
+              className="hidden sm:inline-flex items-center rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-2 text-sm font-medium text-[var(--color-text)] transition hover:border-[var(--color-primary)] hover:text-[var(--color-text)]">
+              Memory Matrix
+            </Link>
 
             {/* Guest: theme pill + auth buttons */}
             {!user ? (

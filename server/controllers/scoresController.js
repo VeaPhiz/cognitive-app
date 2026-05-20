@@ -54,15 +54,23 @@ const getLeaderboard = async (req, res) => {
     }
     const { id: game_id, unit } = games[0];
 
-    // For reaction-time: best = lowest value (ASC)
-    // For future games: we can add direction logic here per unit
-    const order = unit === "ms" ? "ASC" : "DESC";
+    // Explicit scoring rules per game.
+    // This avoids guessing from units and keeps leaderboard behavior predictable.
+    const scoreRules = {
+      "reaction-time": { aggregate: "MIN", order: "ASC" },
+      "memory-matrix": { aggregate: "MAX", order: "DESC" },
+    };
+
+    const { aggregate, order } = scoreRules[game_slug] ??
+      (unit === "ms"
+        ? { aggregate: "MIN", order: "ASC" }
+        : { aggregate: "MAX", order: "DESC" });
 
     const [rows] = await pool.query(
       `SELECT
          u.username,
-         MIN(s.value)   AS best_score,
-         COUNT(s.id)    AS attempts,
+         ${aggregate}(s.value) AS best_score,
+         COUNT(s.id)       AS attempts,
          MAX(s.recorded_at) AS last_played
        FROM scores s
        JOIN users u ON u.id = s.user_id

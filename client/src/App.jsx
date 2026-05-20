@@ -6,7 +6,10 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ReactionTime  from "./pages/ReactionTime";
+import MemoryMatrix from "./pages/MemoryMatrix";
+
 import NotFound from "./pages/NotFound";
+
 
 export default function App() {
   return (
@@ -19,6 +22,7 @@ export default function App() {
             <Route path="/login"    element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/game/reaction-time" element={<ReactionTime />} />
+            <Route path="/game/memory-matrix" element={<MemoryMatrix />} />
             <Route path="*"         element={<NotFound />} />
           </Routes>
         </BrowserRouter>

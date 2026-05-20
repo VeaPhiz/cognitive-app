@@ -16,7 +16,7 @@ const GAMES = [
     description: "Memorize a grid of highlighted squares, then reproduce the pattern from memory.",
     icon: "🧩",
     unit: "score",
-    available: false,
+    available: true,
   },
   {
     slug: "number-memory",
