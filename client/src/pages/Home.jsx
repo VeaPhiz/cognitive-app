@@ -19,6 +19,14 @@ const GAMES = [
     available: true,
   },
   {
+    slug: "tile-flash",
+    name: "Tile Flash",
+    description: "Watch the flashing tiles, then tap them all before time runs out.",
+    icon: "✨",
+    unit: "lvl",
+    available: true,
+  },
+  {
     slug: "number-memory",
     name: "Number Memory",
     description: "Remember the longest number sequence you can before your recall breaks down.",

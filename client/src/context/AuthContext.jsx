@@ -62,7 +62,13 @@ export function AuthProvider({ children }) {
     clearSession();
   }, []);
 
-  const value = { user, token, loading, register, login, logout };
+  const googleLogin = useCallback(async (idToken) => {
+    const { data } = await api.post("/auth/google", { id_token: idToken });
+    persistSession(data.token, data.user);
+    return data;
+  }, []);
+
+  const value = { user, token, loading, register, login, googleLogin, logout };
 
   // Don't render children until localStorage has been read
   if (loading) {

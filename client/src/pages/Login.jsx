@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const navigate  = useNavigate();
   const location  = useLocation();
 
@@ -51,6 +52,35 @@ const set = (field) => (e) => {
       setLoading(false);
     }
   };
+
+  // Google Identity callback
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+  const handleGoogleCredential = async (resp) => {
+    if (!resp?.credential) return;
+    try {
+      setLoading(true);
+      await googleLogin(resp.credential);
+      navigate(from, { replace: true });
+    } catch (err) {
+      setServerError("Google sign-in failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!clientId || !window.google) return;
+    try {
+      window.google.accounts.id.initialize({ client_id: clientId, callback: handleGoogleCredential });
+      window.google.accounts.id.renderButton(
+        document.getElementById("g_id_signin"),
+        { theme: "outline", size: "large", width: "100%" }
+      );
+    } catch (e) {
+      // ignore if google isn't ready yet
+    }
+  }, [clientId]);
 
   const inputClass = (field) =>
     `w-full bg-[var(--color-surface-2)] text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] rounded-xl px-4 py-3 text-sm
@@ -182,6 +212,11 @@ const set = (field) => (e) => {
                 </>
               ) : "Log In"}
             </button>
+          
+            {/* Google sign-in */}
+            <div className="pt-2">
+              <div id="g_id_signin" />
+            </div>
           </form>
 
           <p className="text-center text-sm text-[var(--color-text-muted)] mt-6">

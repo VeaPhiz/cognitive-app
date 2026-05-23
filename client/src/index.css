@@ -64,6 +64,18 @@
   --color-text-faint: #94a8b8;
 }
 
+/* Testing Theme */
+[data-theme="sunset-glow"] {
+  --color-bg: #A47251;
+  --color-surface: #DD9E59;
+  --color-surface-2: #F0D8A1;
+  --color-border: #9FCBAD;
+  --color-primary: #cef59e;
+  --color-text: #5cda66;
+  --color-text-muted: #83cc79;
+  --color-text-faint: #0b0652;
+}
+
 /* ── Base styles ─────────────────────────────────────────────────────────── */
 html {
   background-color: var(--color-bg);

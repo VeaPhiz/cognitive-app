@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useEffect } from "react";
 
 // ── Field-level validation ────────────────────────────────────────────────────
 function validate({ username, email, password, confirm }) {
@@ -38,7 +39,7 @@ function Field({ label, id, error, children }) {
 
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function Register() {
-  const { register } = useAuth();
+  const { register, googleLogin } = useAuth();
   const navigate     = useNavigate();
 
   const [form, setForm] = useState({ username: "", email: "", password: "", confirm: "" });
@@ -72,6 +73,35 @@ export default function Register() {
       setLoading(false);
     }
   };
+
+  // Google Identity callback for register page (creates or signs-in user)
+  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+  const handleGoogleCredential = async (resp) => {
+    if (!resp?.credential) return;
+    try {
+      setLoading(true);
+      await googleLogin(resp.credential);
+      navigate("/");
+    } catch (err) {
+      setServerError("Google sign-in failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!clientId || !window.google) return;
+    try {
+      window.google.accounts.id.initialize({ client_id: clientId, callback: handleGoogleCredential });
+      window.google.accounts.id.renderButton(
+        document.getElementById("g_id_signup"),
+        { theme: "outline", size: "large", width: "100%" }
+      );
+    } catch (e) {
+      // ignore
+    }
+  }, [clientId]);
 
   const inputClass = (field) =>
     `w-full bg-[var(--color-surface-2)] text-[var(--color-text)] placeholder:text-[var(--color-text-faint)] rounded-xl px-4 py-3 text-sm
@@ -218,6 +248,11 @@ export default function Register() {
                 </>
               ) : "Create Account"}
             </button>
+
+            {/* Google sign-in */}
+            <div className="pt-2">
+              <div id="g_id_signup" />
+            </div>
           </form>
 
           {/* Footer */}

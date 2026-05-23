@@ -5,6 +5,7 @@ const THEMES = [
   { id: "pastel-sun",     label: "Pastel Sun",      swatch: ["#FFF9D2", "#FFEBCC", "#BFDDF0", "#8CC0EB"] },
   { id: "cyber-ocean",    label: "Cyber Ocean",     swatch: ["#093C5D", "#3B7597", "#6FD1D7", "#5DF8D8"] },
   { id: "nordic-luxury",  label: "Nordic Luxury",   swatch: ["#E8EDF2", "#2C3947", "#547A95", "#C2A56D"] },
+  { id: "sunset-glow", label: "Testing Theme", swatch: ["#2F1B3B", "#F7A072", "#FFD8A9", "#FFF1D0"] }
 ];
 
 const ThemeContext = createContext(null);
