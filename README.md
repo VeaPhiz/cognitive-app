@@ -31,12 +31,12 @@ To create a web platform for cognitive development, combining educational elemen
 
 ## 🎮 Included Games & Tests
 
-*   ✅ **3x3 Simon Game** – A concentration and memory test requiring users to repeat an increasing sequence of lit squares.
-*   ✅ **Number Memory** – A visual memory challenge where users memorize and reproduce increasingly long sequences of numbers.
-*   ✅ **Visual Memory** – Developed to improve pattern recognition by remembering the exact placement of objects.
-*   ✅ **Reaction Time** – Measures reflex speed and cognitive processing time upon a visual trigger.
-*   ✅ **Typing Test** – Focuses on developing touch-typing skills, training users to type quickly and accurately without looking at the keyboard.
-*   ⏳ **Precision / Accuracy** *(In Development)* – A motor skills test measuring hand-eye coordination by clicking fast-moving targets.
+*   ⚡ **Reaction Time** – React as quickly as possible when the screen changes. This sharpens your response speed, alertness, and ability to act under uncertainty. *(Metric: ms)*
+*   🧩 **Memory Matrix** – Memorize a sequence of highlighted cells and reproduce it from memory. This trains short-term memory, spatial recall, and focused attention. *(Metric: score)*
+*   ✨ **Tile Flash** – Memorize the flashing tiles and select them before the timer runs out. This improves visual attention, pattern recognition, and selection accuracy. *(Metric: lvl)*
+*   🔢 **Number Memory** – Remember the longest number sequence you can before your recall breaks down. This strengthens short-term memory and concentration. *(Metric: digits)*
+*   ⌨️ **Typing Speed** – Type as fast and accurately as possible to train rhythm, motor automation, and focus under pressure. *(Metric: wpm)*
+*   ⏳ 🎯 **Aim Trainer** *(Soon)* – Hit the appearing targets as quickly and precisely as you can to train visual-motor coordination and movement control. *(Metric: ms)*
 
 ---
 
