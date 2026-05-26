@@ -4,6 +4,14 @@
 
 ---
 
+## 📌 Table of Contents
+* [Purpose and Objectives](#-purpose-and-objectives)
+* [Included Games & Tests](#-included-games--tests)
+* [Tech Stack](#%EF%B8%8F-tech-stack)
+* [Getting Started](#-getting-started)
+
+---
+
 ## 🎯 Purpose and Objectives
 
 ### Main Goal
