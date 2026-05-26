@@ -1,55 +1,74 @@
 # MindLab 🧠
 
-**MindLab** е уебсайт, създаден с цел да предоставя интерактивно и образователно изживяване на потребителите чрез разнообразие от когнитивни и моторни игри. Проектът помага за развитието на паметта, вниманието, логическото мислене и скоростта на реакция.
+**MindLab** is a web platform designed to provide an interactive and educational experience for users through a variety of cognitive and motor games. The project helps develop memory, attention, logical thinking, and typing/reaction speed.
 
 ---
 
-## 🎯 Цел и задачи
+## 🎯 Purpose and Objectives
 
-### Основна цел
-Създаване на уеб платформа за когнитивно развитие, съчетаваща образователни елементи с геймификация и проследяване на личния напредък.
+### Main Goal
+To create a web platform for cognitive development, combining educational elements with gamification and personal progress tracking.
 
-### Ключови задачи
-*   **Разработка на игри:** Създаване на модули за тренировка на памет, внимание, бързина на писане и рефлекси.
-*   **Образователен елемент:** Предоставяне на информация във всеки модул за уменията, които се развиват по време на игра.
-*   **Потребителски профили:** Проследяване и съхранение на резултатите и напредъка на потребителите.
-*   **Модерен UX/UI:** Реализиране на привлекателен и интуитивен графичен интерфейс.
-*   **Бъдещи планове:** Добавяне на състезателна среда между потребителите.
-
----
-
-## 🎮 Включени игри и тестове
-
-*   ✅ **3 по 3 Simon Game** – Тест за концентрация и памет, изискващ повтаряне на нарастваща последователност от осветени квадратчета.
-*   ✅ **Памет за цифри** – Предизвикателство за визуалната памет чрез запомняне и възпроизвеждане на все по-дълги поредици от числа.
-*   ✅ **Визуална памет** – Развиване на способността за бързо разпознаване на образи чрез запаметяване на подредба от обекти.
-*   ✅ **Време за реакция** – Измерване на бързината на рефлексите при визуален сигнал.
-*   ✅ **Тест за бързо писане** – Развитие на уменията за бързо и правилно писане, без да се изисква или разчита на гледане на пръстите и клавиатурата.
-*   ⏳ **Точност** *(в процес на разработка)* – Тест за моторни умения и координация между окото и ръката.
+### Key Features & Objectives
+*   **Game Development:** Creating specialized modules to train memory, attention, typing speed, and reflexes.
+*   **Educational Element:** Providing insights within each module about the specific cognitive skills being developed during gameplay.
+*   **User Profiles:** Tracking, saving, and displaying user scores and overall progress over time.
+*   **Modern UX/UI:** Delivering an attractive, clean, and intuitive graphical user interface.
+*   **Future Plans:** Implementing a competitive real-time environment for users to challenge each other.
 
 ---
 
-## 🛠️ Технологичен стек
+## 🎮 Included Games & Tests
+
+*   ✅ **3x3 Simon Game** – A concentration and memory test requiring users to repeat an increasing sequence of lit squares.
+*   ✅ **Number Memory** – A visual memory challenge where users memorize and reproduce increasingly long sequences of numbers.
+*   ✅ **Visual Memory** – Developed to improve pattern recognition by remembering the exact placement of objects.
+*   ✅ **Reaction Time** – Measures reflex speed and cognitive processing time upon a visual trigger.
+*   ✅ **Typing Test** – Focuses on developing touch-typing skills, training users to type quickly and accurately without looking at the keyboard.
+*   ⏳ **Precision / Accuracy** *(In Development)* – A motor skills test measuring hand-eye coordination by clicking fast-moving targets.
+
+---
+
+## 🛠️ Tech Stack
+
 *   **Frontend:** React (Vite), JavaScript (JSX), Tailwind CSS, CSS3, HTML5
 *   **Backend:** Node.js, Express.js
-*   **Инструменти & Конфигурация:** ESLint, PostCSS
+*   **Tooling & Config:** ESLint, PostCSS
 
 ---
 
-## 💻 Как да стартирате проекта локално
+## 💻 Getting Started
 
-### 1. Клонирайте хранилището
+The project is split into a client-side (frontend) and a server-side (backend) application.
+
+### 1. Clone the Repository
 ```bash
 git clone https://github.com
 cd cognitive-app
 ```
 
-### 2. Инсталирайте зависимостите
-```bash
-npm install
-```
+### 2. Setup and Run the Backend (Server)
+1. Navigate to the server directory:
+   ```bash
+   cd server
+   ```
+2. Install the backend dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the server:
+   ```bash
+   npm start
+   # or 'node server.js' depending on your package.json setup
+   ```
 
-### 3. Стартирайте приложението
-```bash
-npm start
-```
+### 3. Setup and Run the Frontend (Client)
+1. Open a new terminal window in the root directory (`cognitive-app`).
+2. Install the frontend dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the React application via Vite:
+   ```bash
+   npm run dev
+   ```
