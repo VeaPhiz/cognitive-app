@@ -37,13 +37,13 @@ To create a web platform for cognitive development, combining educational elemen
 
 ---
 
-## 💻 Getting Started
+## 💻 Installing
 
 The project is split into a client-side (frontend) and a server-side (backend) application.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com
+git clone https://github.com/VeaPhiz/cognitive-app
 cd cognitive-app
 ```
 
